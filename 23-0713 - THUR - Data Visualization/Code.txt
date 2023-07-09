@@ -1,0 +1,1 @@
+data.replace(to_replace={'Fruit': {0:'Apple', 1:'Orange'}})
