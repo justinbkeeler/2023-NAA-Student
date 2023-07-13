@@ -1,0 +1,35 @@
+RevUSD
+IF [Currency] = "USD"
+THEN [Unit Price] * [Quantity]
+ELSE
+[Unit Price] * [Quantity] * [Exchange Rate  (USD/Euro)]
+END
+
+DiscountUSD
+IF [Currency]= "USD"
+THEN [Discount]
+ELSE
+[Discount]* [Exchange Rate  (USD/Euro)]
+END
+
+COGSUSD
+[Unit Cost at Goods Issue USD] * [Quantity]
+
+GrossProfitUSD
+[RevUSD] - [COGSUSD] - [DiscountUSD]
+
+GrossProfitMargin%
+[GrossProfitUSD] / [RevUSD] * 100
+
+Discount%
+[DiscountUSD] / [RevUSD]
+
+StdCostVariance
+([Unit Cost at Goods Issue USD] - [Product Cost USD])* [Quantity]
+
+SalesPriceVariance
+IF [Currency] = "USD"
+THEN ([Unit Price] - [Sales Price USD]) * [Quantity]
+ELSE
+(([Unit Price] * [Exchange Rate  (USD/Euro)]) - [Sales Price USD]) * [Quantity]
+END
